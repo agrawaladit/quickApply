@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/quickapply.iml" filepath="$PROJECT_DIR$/quickapply.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/quickapply.iml" filepath="$PROJECT_DIR$/frontend/quickapply.iml" />
     </modules>
   </component>
 </project>
