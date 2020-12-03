@@ -23,8 +23,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function SelectSkills() {
+export default function SelectSkills(props) {
     const classes = useStyles();
+
+    const onChange = (event, value) => {
+        if (props.variant === 'profile') {
+
+        } else {
+
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -34,6 +42,7 @@ export default function SelectSkills() {
                 options={top100Films}
                 getOptionLabel={(option) => option.title}
                 filterSelectedOptions
+                onChange={onChange}
                 renderInput={(params) => (
                     <TextField
                         className={classes.tf}

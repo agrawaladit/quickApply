@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import {Typography} from "@material-ui/core";
 import {DataGrid} from '@material-ui/data-grid';
 import Box from "@material-ui/core/Box";
 import NewJob from "./NewJob";
+import PrimarySearchAppBar from "./AppBar";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +23,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
     const classes = useStyles();
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                '',
+            );
+            setData(result.data);
+        };
+
+        fetchData().then(r => console.log("Data Fetched"));
+    }, []);
 
     const rows = [
         {id: 1, lastName: 'Snow', firstName: 'Jon', age: 35},
@@ -43,31 +57,34 @@ export default function Profile() {
 
 
     return (
-        <Grid container direction={"column"} className={classes.root}>
-            <Grid container direction={"column"}>
-                <Typography variant={"h3"} style={{justifyContent: "start", display: "flex",}}>
-                    Google
-                </Typography>
-            </Grid>
-            <Grid container style={{paddingTop: "40px"}} direction={"column"}>
-                <Box display="flex" p={1} bgcolor="background.paper">
-                    <Box p={1} flexGrow={1}>
-                        <Typography variant={"h4"} style={{justifyContent: "start", display: "flex",}}>
-                            Applicants
-                        </Typography>
+        <div>
+            <PrimarySearchAppBar/>
+            <Grid container direction={"column"} className={classes.root} style={{padding: "50px"}}>
+                <Grid container direction={"column"}>
+                    <Typography variant={"h3"} style={{justifyContent: "start", display: "flex",}}>
+                        Google
+                    </Typography>
+                </Grid>
+                <Grid container style={{paddingTop: "40px"}} direction={"column"}>
+                    <Box display="flex" p={1} bgcolor="background.paper">
+                        <Box p={1} flexGrow={1}>
+                            <Typography variant={"h4"} style={{justifyContent: "start", display: "flex",}}>
+                                Applicants
+                            </Typography>
+                        </Box>
+                        <Box p={1}>
+                            <NewJob/>
+                        </Box>
                     </Box>
-                    <Box p={1}>
-                        <NewJob/>
-                    </Box>
-                </Box>
-                <br/>
-                <br/>
-                <div style={{height: 400, width: '100%'}}>
-                    <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection={false}
-                              style={{justifyContent: "start", display: "flex"}}/>
-                </div>
-            </Grid>
+                    <br/>
+                    <br/>
+                    <div style={{height: 400, width: '100%'}}>
+                        <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection={false}
+                                  style={{justifyContent: "start", display: "flex"}}/>
+                    </div>
+                </Grid>
 
-        </Grid>
+            </Grid>
+        </div>
     );
 }

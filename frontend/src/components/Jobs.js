@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {createStyles, makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
+import PrimarySearchAppBar from "./AppBar";
+import axios from 'axios';
 
 const _ = require("lodash");
 
@@ -52,6 +54,18 @@ const Jobs = (props) => {
             skills: ["A","B"],
         }
     ];
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                '',
+            );
+            setData(result.data);
+        };
+
+        fetchData().then(r => console.log("Data Fetched"));
+    }, []);
 
     const customSort = (order, property) => {
         changeOrder(order === 1 ? "asc" : "desc");
@@ -60,7 +74,8 @@ const Jobs = (props) => {
 
     return (
         <div className={classes.root}>
-            <Grid container direction="column">
+            {props.variant === "applications"? null : <PrimarySearchAppBar/>}
+            <Grid container direction="column" style={props.variant === "applications"? {}:{padding: "50px"}}>
                 <TableHeader changeSort={customSort} variant={props.variant}/>
                 {_.orderBy(finalData, [sortProperty], [sortOrder])
                     .slice(page * rows - rows, page * rows)
