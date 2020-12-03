@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -6,6 +6,9 @@ import { Typography } from '@material-ui/core';
 import SelectSkills from './SelectSkills';
 import Jobs from './Jobs';
 import { Helmet } from 'react-helmet';
+import PrimarySearchAppBar from './AppBar';
+import axios from 'axios';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +25,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
   const classes = useStyles();
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('');
+      setData(result.data);
+    };
+
+    fetchData().then((r) => console.log('Data Fetched'));
+  }, []);
 
   return (
     <div>
@@ -30,12 +43,19 @@ export default function Profile() {
         <title>Applicant Profile</title>
         <meta name='description' content='Applicant Profile Page' />
       </Helmet>
-      <Grid container direction={'column'} className={classes.root}>
+      <PrimarySearchAppBar />
+      <Grid
+        container
+        direction={'column'}
+        className={classes.root}
+        style={{ padding: '50px' }}
+      >
         <Grid container>
           <Grid container item xs={2}>
-            <Avatar alt='Remy Sharp' className={classes.large}>
-              Afsds
-            </Avatar>
+            <AccountCircleRoundedIcon
+              className={classes.large}
+              color={'disabled'}
+            />
           </Grid>
           <Grid container item xs={10} direction={'column'}>
             <Typography
@@ -46,7 +66,7 @@ export default function Profile() {
             </Typography>
             <br />
             <br />
-            <SelectSkills />
+            <SelectSkills variant={'profile'} />
           </Grid>
         </Grid>
         <Grid container style={{ paddingTop: '40px' }} direction={'column'}>

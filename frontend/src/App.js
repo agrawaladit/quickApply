@@ -12,8 +12,7 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-        <PrimarySearchAppBar />
-        <main style={{ padding: '50px' }}>
+        <main>
           <Switch>
             <Route path='/' component={SignIn} exact />
             <Route path='/signup' component={SignUp} />

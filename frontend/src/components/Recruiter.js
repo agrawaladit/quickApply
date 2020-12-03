@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import Box from '@material-ui/core/Box';
 import NewJob from './NewJob';
+import PrimarySearchAppBar from './AppBar';
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +24,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
   const classes = useStyles();
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('');
+      setData(result.data);
+    };
+
+    fetchData().then((r) => console.log('Data Fetched'));
+  }, []);
 
   const rows = [
     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
@@ -59,7 +71,13 @@ export default function Profile() {
         <title>Recruiter Page</title>
         <meta name='description' content='Recruiter job posting page' />
       </Helmet>
-      <Grid container direction={'column'} className={classes.root}>
+      <PrimarySearchAppBar />
+      <Grid
+        container
+        direction={'column'}
+        className={classes.root}
+        style={{ padding: '50px' }}
+      >
         <Grid container direction={'column'}>
           <Typography
             variant={'h3'}
