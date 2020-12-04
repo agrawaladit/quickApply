@@ -5,6 +5,7 @@ import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import PrimarySearchAppBar from "./AppBar";
 import axios from 'axios';
+import Pagination from "./Pagination";
 
 const _ = require("lodash");
 
@@ -89,6 +90,7 @@ const Jobs = (props) => {
                             variant={props.variant}
                         />
                     ))}
+                <Pagination changePage={changePage} setRows={setRows} rows={rows} length={finalData.length} />
             </Grid>
         </div>
     );

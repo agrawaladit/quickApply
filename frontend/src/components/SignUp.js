@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
 
 function Copyright() {
     return (
@@ -48,6 +52,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const [fn, updateFn] = useState("")
+    const [ln, updateLn] = useState("")
+    const [password, updatePassword] = useState("")
+    const [email, updateEmail] = useState("")
+    const [type, updateType] = useState("Applicant")
+
+    const signup = () => {
+
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -71,6 +84,8 @@ export default function SignUp() {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                value={fn}
+                                onChange={(e) => updateFn(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -82,6 +97,8 @@ export default function SignUp() {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
+                                value={ln}
+                                onChange={(e) => updateLn(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -93,6 +110,8 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                value={email}
+                                onChange={(e) => updateEmail(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -105,13 +124,18 @@ export default function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={(e) => updateFn(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Category</FormLabel>
+                                <RadioGroup color={"primary"} aria-label="gender" name="gender1" value={type} onChange={(e) => updateType(e.target.value)}>
+                                    <FormControlLabel value="applicant" control={<Radio />} label="Applicant" />
+                                    <FormControlLabel value="recruiter" control={<Radio />} label="Recruiter" />
+                                </RadioGroup>
+                            </FormControl>
                         </Grid>
                     </Grid>
                     <Button
@@ -120,6 +144,7 @@ export default function SignUp() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={signup}
                     >
                         Sign Up
                     </Button>
