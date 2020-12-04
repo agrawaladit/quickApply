@@ -6,9 +6,9 @@ import Box from "@material-ui/core/Box";
 const CircularProgressWithPercentage = (props) => {
     let variableColor;
 
-    if (props.value > 75) variableColor = "rgba(158, 255, 164)";
-    else if (props.value < 50) variableColor = "rgba(255, 102, 97)";
-    else variableColor = "rgba(255, 208, 97)";
+    if (props.value > 75) variableColor = "rgb(0,95,7)";
+    else if (props.value < 50) variableColor = "rgb(250,55,48)";
+    else variableColor = "rgb(196,140,0)";
 
     return (
         <Box position="relative" color="black" display="flex" alignItems="center" justifyContent="center">

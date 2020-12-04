@@ -200,7 +200,7 @@ export default function PrimarySearchAppBar() {
                             </Link>
                         </IconButton>
                         <IconButton>
-                            <Link href={"#"}>
+                            <Link href={"/"}>
                                 <ExitToAppIcon style={{ color: "white" }}/>
                             </Link>
                         </IconButton>

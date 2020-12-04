@@ -59,7 +59,7 @@ export default function SignUp() {
     const [type, updateType] = useState("Applicant")
 
     const signup = () => {
-
+        console.log(fn,ln,password,email,type)
     }
 
     return (
@@ -125,7 +125,7 @@ export default function SignUp() {
                                 id="password"
                                 autoComplete="current-password"
                                 value={password}
-                                onChange={(e) => updateFn(e.target.value)}
+                                onChange={(e) => updatePassword(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -143,7 +143,6 @@ export default function SignUp() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
                         onClick={signup}
                     >
                         Sign Up

@@ -4,6 +4,8 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "axios": "^0.21.0",
     "lodash": "^4.17.20",
+    "qs": "^6.9.4",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0"
   }
 }

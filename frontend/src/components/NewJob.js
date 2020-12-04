@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import SelectSkills from "./SelectSkills";
 import Grid from "@material-ui/core/Grid";
+import axios from 'axios';
+import qs from 'qs';
 
 const styles = (theme) => ({
     root: {
@@ -68,12 +70,29 @@ const DialogActions = withStyles((theme) => ({
 export default function NewJob() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = useState("");
+    const [location, setLocation] = useState("");
+    const [company, setCompany] = useState("Microsoft");
+    const [description, setDescription] = useState("");
+    const [skills, setSkills] = useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
+        axios({
+            method: 'post',
+            url: 'http://ec2-52-12-241-178.us-west-2.compute.amazonaws.com:3000/api/jobs/submit',
+            data: qs.stringify({
+                title: title,
+                jobid: 30,
+                company: "Google",
+                location: location,
+                description: description,
+                skills: skills
+            })
+        })
     };
 
     return (
@@ -96,6 +115,8 @@ export default function NewJob() {
                                     root: classes.cssLabel,
                                 }
                             }}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                         <br/>
                         <TextField
@@ -107,6 +128,8 @@ export default function NewJob() {
                                     root: classes.cssLabel,
                                 }
                             }}
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
                         />
                         <br/>
                         <TextField
@@ -120,9 +143,11 @@ export default function NewJob() {
                                     root: classes.cssLabel,
                                 }
                             }}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <br/>
-                        <SelectSkills/>
+                        <SelectSkills onChange={(skills) => setSkills(skills)}/>
                     </Grid>
                 </DialogContent>
                 <DialogActions>

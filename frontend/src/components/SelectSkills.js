@@ -43,6 +43,7 @@ export default function SelectSkills(props) {
                 getOptionLabel={(option) => option.title}
                 filterSelectedOptions
                 onChange={onChange}
+                defaultValue={props.variant === 'profile'? [top100Films[1], top100Films[2]] : []}
                 renderInput={(params) => (
                     <TextField
                         className={classes.tf}

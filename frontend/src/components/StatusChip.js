@@ -8,15 +8,15 @@ const StatusChip = (props) => {
     switch (props.value) {
         case "Pending Review":
         case "Active":
-            mode = "rgba(158, 255, 164, 0.9)";
+            mode = "rgba(5,164,14,0.9)";
             break;
         case "Not Interested":
         case "Closed":
-            mode = "rgba(255, 102, 97, 0.9)";
+            mode = "rgba(245,34,27,0.9)";
             break;
         case "Hold":
         case "Paused":
-            mode = "rgba(255, 208, 97, 0.9)";
+            mode = "rgba(227,167,18,0.9)";
             break;
         case "New":
             mode = theme.palette.secondary.main;

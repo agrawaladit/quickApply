@@ -15,6 +15,9 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Button, Divider} from "@material-ui/core";
+import axios from 'axios';
+import qs from 'qs';
+
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -75,6 +78,21 @@ const TableRow = (props) => {
         // history.push(ROUTES.OPPORTUNITY, { ...data, recruiterOrAdmin: props.recruiterOrAdmin });
     };
 
+    const apply = (e) => {
+        e.stopPropagation();
+        axios({
+            method: 'post',
+            url: 'http://ec2-52-12-241-178.us-west-2.compute.amazonaws.com:3000/api/application/submit',
+            data: qs.stringify({
+                applicationid: Math.floor((Math.random() * 100) + 30),
+                applicantid: Math.floor((Math.random() * 100) + 30),
+                jobid: Math.floor((Math.random() * 100) + 30),
+                status: "active",
+                matchpercentage: Math.floor((Math.random() * 100) + 30),
+            })
+        })
+    }
+
 
     const content =
         <Grid container className={props.variant === "applications" ? classes.grid : null}>
@@ -113,9 +131,9 @@ const TableRow = (props) => {
                         className={classes.typography}
                         style={{zIndex: 1000}}>
                         {props.variant === "applications" ?
-                            <StatusChip value={"Closed"}/>
+                            <StatusChip value={"Pending Review"}/>
                             :
-                            <Button variant="outlined" color={"primary"} className={classes.button} onClick={(e) => e.stopPropagation()}>
+                            <Button variant="outlined" color={"primary"} className={classes.button} onClick={(e) =>apply(e)}>
                                 Apply
                             </Button>
                         }
